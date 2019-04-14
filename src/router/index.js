@@ -2,6 +2,7 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import Login from '@/components/login'
 import Home from '@/components/home'
+import User from '@/components/user'
 Vue.use(Router)
 
  const router = new Router({
@@ -18,14 +19,21 @@ Vue.use(Router)
     {
       path: '/home',
       name: 'Home',
-      component: Home
+      component: Home,
+      children: [
+        {
+          path: '/user',
+          name: 'User',
+          component: User,
+        }
+      ]
     }
   ]
 })
 
 router.beforeEach((to,from,next) => {
-  console.log(to)
-  console.log(from)
+  // console.log(to)
+  // console.log(from)
   let token = localStorage.getItem('myToken')
   if (to.path == '/login') {
     next()
